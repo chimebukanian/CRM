@@ -28,6 +28,7 @@ def get_env_variable(var_name):
 # Get ENV VARIABLES key
 ENV_ROLE = get_env_variable('ENV_ROLE')
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -43,7 +44,7 @@ if ENV_ROLE == 'development':
     TEMPLATE_DEBUG = DEBUG
     CRMEASY_DB_PASS = get_env_variable('CRMEASY_DB_PASS')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -55,7 +56,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'marketing'
+    'marketing',
+    'suscribers'
 ]
 
 MIDDLEWARE = [
@@ -162,3 +164,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.messages.context_processors.messages",
     'django.core.context_processors.request',
 )
+
+if ENV_ROLE=='production':
+    import dj_database_url
+    DATABASES['default']=dj-database_url.config()
